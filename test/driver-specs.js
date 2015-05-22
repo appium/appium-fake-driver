@@ -47,20 +47,20 @@ describe('FakeDriver - via HTTP', () => {
 
     describe('contexts, webviews, frames', () => {
       it('should get current context', async () => {
-        await driver.currentContext().should.eventually.become('NATIVE_APP');
+        await driver.currentContext()
+                .should.eventually.become('NATIVE_APP');
       });
       it('should get contexts', async () => {
-        await driver.contexts().should.eventually.become(['NATIVE_APP', 'WEBVIEW_1']);
+        await driver.contexts()
+                .should.eventually.become(['NATIVE_APP', 'WEBVIEW_1']);
       });
       it('should not set context that is not there', async () => {
-        await driver.context('WEBVIEW_FOO').should.eventually.be.rejectedWith(/35/);
+        await driver.context('WEBVIEW_FOO')
+                .should.eventually.be.rejectedWith(/35/);
       });
-      it.skip('should set context', async () => {
-        driver
-          .context('WEBVIEW_1')
-          .currentContext()
-            .should.eventually.become('WEBVIEW_1')
-          .nodeify();
+      it('should set context', async () => {
+        await driver.context('WEBVIEW_1').currentContext()
+                .should.eventually.become('WEBVIEW_1');
       });
       it.skip('should find webview elements in a webview', async () => {
         driver
@@ -90,12 +90,8 @@ describe('FakeDriver - via HTTP', () => {
           .nodeify();
       });
       it.skip('should go back to native context', async () => {
-        driver
-          .context('NATIVE_APP')
-          .elementByXPath('//*')
-          .getTagName()
-            .should.eventually.become('app')
-          .nodeify();
+        await driver.context('NATIVE_APP').elementByXPath('//*').getTagName()
+                .should.eventually.become('app');
       });
       it.skip('should not set a frame in a native context', async () => {
         driver
