@@ -34,6 +34,7 @@
     "mobile-json-wire-protocol": "^0.6.0",
     "source-map-support": "^0.2.10",
     "xmldom": "^0.1.19",
+    "xpath": "0.0.9",
     "yargs": "^3.9.0"
   },
   "scripts": {
