@@ -1,2 +1,16 @@
-# appium-fake-driver
-A fake Appium driver used for testing and demonstration
+appium-fake-driver
+===================
+
+Work in progress, stay tuned!
+
+## Watch
+
+```
+npm run watch
+```
+
+## Test
+
+```
+npm test
+```
