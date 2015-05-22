@@ -4,6 +4,7 @@ import { startServer } from '../..';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
+import path from 'path';
 import 'mochawait';
 
 const should = chai.should();
@@ -11,10 +12,11 @@ chai.use(chaiAsPromised);
 
 const TEST_HOST = 'localhost';
 const TEST_PORT = 4774;
+const TEST_APP = path.resolve(__dirname, "..", "..", "test", "fixtures", "app.xml");
 
 describe('FakeDriver - via HTTP', () => {
-
   let server;
+  const caps = {app: TEST_APP};
   before(async () => {
     server = await startServer(TEST_PORT, TEST_HOST);
   });
@@ -25,7 +27,7 @@ describe('FakeDriver - via HTTP', () => {
   describe('commands', () => {
     it('should start and stop a session', async () => {
       let driver = wd.promiseChainRemote(TEST_HOST, TEST_PORT);
-      let [sessionId] = await driver.init({});
+      let [sessionId] = await driver.init(caps);
       should.exist(sessionId);
       sessionId.should.be.a('string');
       await driver.quit();
@@ -37,7 +39,7 @@ describe('FakeDriver - via HTTP', () => {
     let driver;
     before(async () => {
       driver = wd.promiseChainRemote({host: TEST_HOST, port: TEST_PORT});
-      await driver.init();
+      await driver.init(caps);
     });
     after(async () => {
       await driver.quit();
