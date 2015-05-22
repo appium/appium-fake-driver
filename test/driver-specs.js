@@ -52,11 +52,8 @@ describe('FakeDriver - via HTTP', () => {
       it('should get contexts', async () => {
         await driver.contexts().should.eventually.become(['NATIVE_APP', 'WEBVIEW_1']);
       });
-      it.skip('should not set context that is not there', async () => {
-        driver
-          .context('WEBVIEW_FOO')
-            .should.eventually.be.rejectedWith(/35/)
-          .nodeify();
+      it('should not set context that is not there', async () => {
+        await driver.context('WEBVIEW_FOO').should.eventually.be.rejectedWith(/35/);
       });
       it.skip('should set context', async () => {
         driver
