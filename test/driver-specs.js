@@ -1,12 +1,14 @@
 // transpile:mocha
 
-import { startServer } from '../..';
-import { TEST_APP, TEST_HOST, TEST_PORT } from './helpers';
-import contextTests from './context-tests';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
 import 'mochawait';
+import { startServer } from '../..';
+import { TEST_APP, TEST_HOST, TEST_PORT } from './helpers';
+
+import contextTests from './context-tests';
+import findElementTests from './find-element-tests';
 
 const should = chai.should();
 const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
@@ -39,121 +41,8 @@ describe('FakeDriver - via HTTP', () => {
 
   describe('session-based tests', () => {
     contextTests();
+    findElementTests();
   });
-
-    //describe('finding elements', () => {
-      //it.skip('should find a single element by xpath', async () => {
-        //driver
-          //.elementByXPath('//MockWebView')
-          //.then(function (el) {
-            //el.value.should.exist;
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find a single element that is not there', async () => {
-        //driver
-          //.elementByXPath('//dontexist')
-          //.should.eventually.be.rejectedWith(/7/)
-          //.nodeify();
-      //});
-      //it.skip('should find multiple elements', async () => {
-        //driver
-          //.elementsByXPath('//MockListItem')
-          //.then(function (els) {
-            //els.should.have.length(3);
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find multiple elements that are not there', async () => {
-        //driver
-          //.elementsByXPath('//dontexist')
-          //.should.eventually.eql([])
-          //.nodeify();
-      //});
-
-      //it.skip('should find a single element by id', async () => {
-        //driver
-          //.elementById('wv')
-          //.then(function (el) {
-            //el.value.should.exist;
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find a single element by id that is not there', async () => {
-        //driver
-          //.elementById('dontexist')
-          //.should.eventually.be.rejectedWith(/7/)
-          //.nodeify();
-      //});
-      //it.skip('should find multiple elements by id', async () => {
-        //driver
-          //.elementsById('li')
-          //.then(function (els) {
-            //els.should.have.length(2);
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find multiple elements by id that are not there', async () => {
-        //driver
-          //.elementsById('dontexist')
-          //.should.eventually.eql([])
-          //.nodeify();
-      //});
-
-      //it.skip('should find a single element by class', async () => {
-        //driver
-          //.elementByClassName('MockWebView')
-          //.then(function (el) {
-            //el.value.should.exist;
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find a single element by class that is not there', async () => {
-        //driver
-          //.elementById('dontexist')
-          //.should.eventually.be.rejectedWith(/7/)
-          //.nodeify();
-      //});
-      //it.skip('should find multiple elements by class', async () => {
-        //driver
-          //.elementsByClassName('MockListItem')
-          //.then(function (els) {
-            //els.should.have.length(3);
-          //})
-          //.nodeify();
-      //});
-      //it.skip('should not find multiple elements by class that are not there', async () => {
-        //driver
-          //.elementsByClassName('dontexist')
-          //.should.eventually.eql([])
-          //.nodeify();
-      //});
-
-      //it.skip('should not find a single element with bad strategy', async () => {
-        //driver
-          //.elementByCss('.sorry')
-          //.should.eventually.be.rejectedWith(/9/)
-          //.nodeify();
-      //});
-      //it.skip('should not find a single element with bad selector', async () => {
-        //driver
-          //.elementByXPath('badsel')
-          //.should.eventually.be.rejectedWith(/32/)
-          //.nodeify();
-      //});
-      //it.skip('should not find multiple elements with bad strategy', async () => {
-        //driver
-          //.elementsByCss('.sorry')
-          //.should.eventually.be.rejectedWith(/9/)
-          //.nodeify();
-      //});
-      //it.skip('should not find multiple elements with bad selector', async () => {
-        //driver
-          //.elementsByXPath('badsel')
-          //.should.eventually.be.rejectedWith(/32/)
-          //.nodeify();
-      //});
-    //});
 
     //describe('interacting with elements', () => {
       //var el;

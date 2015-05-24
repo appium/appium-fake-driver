@@ -32,22 +32,16 @@ function contextTests () {
       await driver.frame('iframe1').title()
               .should.eventually.become('Test iFrame');
     });
-    it.skip('should switch back to default frame', async () => {
-      driver
-        .frame(null)
-        .title()
-        .should.eventually.become('Test Webview')
-        .nodeify();
+    it('should switch back to default frame', async () => {
+      await driver.frame(null).title()
+              .should.eventually.become('Test Webview');
     });
-    it.skip('should go back to native context', async () => {
+    it('should go back to native context', async () => {
       await driver.context('NATIVE_APP').elementByXPath('//*').getTagName()
               .should.eventually.become('app');
     });
-    it.skip('should not set a frame in a native context', async () => {
-      driver
-        .frame('iframe1')
-        .should.eventually.be.rejectedWith(/36/)
-        .nodeify();
+    it('should not set a frame in a native context', async () => {
+      await driver.frame('iframe1').should.eventually.be.rejectedWith(/36/);
     });
   });
 }
