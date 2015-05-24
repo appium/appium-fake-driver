@@ -28,12 +28,9 @@ function contextTests () {
     it('should not switch to a frame that is not there', async () => {
       await driver.frame('foo').should.eventually.be.rejectedWith(/8/);
     });
-    it.skip('should switch to an iframe', async () => {
-      driver
-        .frame('iframe1')
-        .title()
-        .should.eventually.become('Test iFrame')
-        .nodeify();
+    it('should switch to an iframe', async () => {
+      await driver.frame('iframe1').title()
+              .should.eventually.become('Test iFrame');
     });
     it.skip('should switch back to default frame', async () => {
       driver
