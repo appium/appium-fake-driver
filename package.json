@@ -23,7 +23,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "appium-base-driver": "^0.1.0",
+    "appium-base-driver": "^0.1.2",
     "appium-express": "0.0.1",
     "appium-logger": "^1.0.0",
     "asyncbox": "^2.0.2",
@@ -31,7 +31,7 @@
     "babel-runtime": "^5.3.3",
     "bluebird": "^2.9.25",
     "lodash": "^3.9.1",
-    "mobile-json-wire-protocol": "^0.6.0",
+    "mobile-json-wire-protocol": "^0.7.0",
     "source-map-support": "^0.2.10",
     "xmldom": "^0.1.19",
     "xpath": "0.0.9",
