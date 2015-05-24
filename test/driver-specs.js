@@ -1,6 +1,6 @@
 // transpile:mocha
 
-//import { startServer } from '../..';
+import { startServer } from '../..';
 import { TEST_APP, TEST_HOST, TEST_PORT } from './helpers';
 import contextTests from './context-tests';
 import chai from 'chai';
@@ -9,17 +9,21 @@ import wd from 'wd';
 import 'mochawait';
 
 const should = chai.should();
+const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
 chai.use(chaiAsPromised);
 
 describe('FakeDriver - via HTTP', () => {
   let server;
   const caps = {app: TEST_APP};
   before(async () => {
-    server = null;
-    //server = await startServer(TEST_PORT, TEST_HOST);
+    if (shouldStartServer) {
+      server = await startServer(TEST_PORT, TEST_HOST);
+    }
   });
   after(() => {
-    //server.close();
+    if (shouldStartServer) {
+      server.close();
+    }
   });
 
   describe('commands', () => {

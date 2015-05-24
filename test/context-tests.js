@@ -25,11 +25,8 @@ function contextTests () {
       await driver.elementByXPath('//*').getTagName()
               .should.eventually.become('html');
     });
-    it.skip('should not switch to a frame that is not there', async () => {
-      driver
-        .frame('foo')
-        .should.eventually.be.rejectedWith(/8/)
-        .nodeify();
+    it('should not switch to a frame that is not there', async () => {
+      await driver.frame('foo').should.eventually.be.rejectedWith(/8/);
     });
     it.skip('should switch to an iframe', async () => {
       driver
