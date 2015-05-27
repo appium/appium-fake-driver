@@ -9,66 +9,35 @@ function elementTests () {
     let driver;
     initSession(caps).then((d) => { driver = d; });
 
-    let el;
-    it.skip('should not send keys to an invalid element', async () => {
-      driver
-        .elementByXPath('//MockListItem')
-        .sendKeys("test value")
-        .should.eventually.be.rejectedWith(/12/)
-        .nodeify();
+    it('should not send keys to an invalid element', async () => {
+      await driver.elementByXPath('//MockListItem').sendKeys("test value")
+              .should.eventually.be.rejectedWith(/12/);
     });
-    it.skip('should send keys to an element', async () => {
-      driver
-        .elementByXPath('//MockInputField')
-        .then(function (_el) {
-          el = _el;
-          return el;
-        })
-        .sendKeys("test value")
-        .nodeify();
+    it('should send keys to an element and retrieve text', async () => {
+      let el = await driver.elementByXPath('//MockInputField');
+      await el.sendKeys("test value");
+      (await el.text()).should.eql("test value");
     });
-    it.skip('should get text of an element', async () => {
-      el
-        .text()
-        .should.eventually.become("test value")
-        .nodeify();
+    it('should not clear an invalid element', async () => {
+      await driver.elementByXPath('//MockListItem').clear()
+              .should.eventually.be.rejectedWith(/12/);
     });
-    it.skip('should not clear an invalid element', async () => {
-      driver
-        .elementByXPath('//MockListItem')
-        .clear()
-        .should.eventually.be.rejectedWith(/12/)
-        .nodeify();
+    it('should clear an element', async () => {
+      let el = driver.elementByXPath('//MockInputField');
+      (await el.text()).should.not.eql('');
+      await el.clear();
+      (await el.text()).should.eql('');
     });
-    it.skip('should clear an element', async () => {
-      driver
-        .elementByXPath('//MockInputField')
-        .clear()
-        .text()
-        .should.eventually.become('')
-        .nodeify();
+    it('should not click an invisible element', async () => {
+      await driver.elementById('Button1').click()
+              .should.eventually.be.rejectedWith(/12/);
     });
-    it.skip('should not click an invisible element', async () => {
-      driver
-        .elementByXPath('//MockButton[@id="Button1"]')
-        .click()
-        .should.eventually.be.rejectedWith(/12/)
-        .nodeify();
-    });
-    it.skip('should click an element', async () => {
-      driver
-        .elementByXPath('//MockButton[@id="Button2"]')
-        .then(function (_el) { el = _el; return el; })
-        .click()
-        .click()
-        .click()
-        .nodeify();
-    });
-    it.skip('should get the attribute of an element', async () => {
-      el
-        .getAttribute('clicks')
-        .should.eventually.become(3)
-        .nodeify();
+    it('should click an element and get its attributes', async () => {
+      let el = driver.elementById('Button2');
+      await el.click();
+      await el.click();
+      await el.click();
+      (await el.getAttribute('clicks')).should.equal(3);
     });
     it.skip('should get the name of an element', async () => {
       driver
