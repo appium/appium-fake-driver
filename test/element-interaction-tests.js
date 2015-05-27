@@ -39,118 +39,64 @@ function elementTests () {
       await el.click();
       (await el.getAttribute('clicks')).should.equal(3);
     });
-    it.skip('should get the name of an element', async () => {
-      driver
-        .elementByClassName('MockInputField')
-          .getTagName()
-          .should.eventually.become('MockInputField')
-        .elementById('wv')
-          .getTagName()
-          .should.eventually.become('MockWebView')
-        .nodeify();
+    it('should get the name of an element', async () => {
+      let el = await driver.elementByClassName('MockInputField');
+      (await el.getTagName()).should.equal('MockInputField');
+      el = await driver.elementById('wv');
+      (await el.getTagName()).should.equal('MockWebView');
     });
-    it.skip('should detect whether an element is displayed', async () => {
-      driver
-        .elementByXPath('//MockButton[@id="Button1"]')
-        .isDisplayed()
-          .should.eventually.become(false)
-        .elementByXPath('//MockButton[@id="Button2"]')
-        .isDisplayed()
-          .should.eventually.become(true)
-        .nodeify();
+    it('should detect whether an element is displayed', async () => {
+      let el = driver.elementById('Button1');
+      (await el.isDisplayed()).should.equal(false);
+      el = driver.elementById('Button2');
+      (await el.isDisplayed()).should.equal(true);
     });
-    it.skip('should detect whether an element is enabled', async () => {
-      driver
-        .elementByXPath('//MockButton[@id="Button1"]')
-        .isEnabled()
-          .should.eventually.become(false)
-        .elementByXPath('//MockButton[@id="Button2"]')
-        .isEnabled()
-          .should.eventually.become(true)
-        .nodeify();
+    it('should detect whether an element is enabled', async () => {
+      let el = driver.elementById('Button1');
+      (await el.isEnabled()).should.equal(false);
+      el = driver.elementById('Button2');
+      (await el.isEnabled()).should.equal(true);
     });
-    it.skip('should detect whether an element is enabled', async () => {
-      driver
-        .elementByXPath('//MockButton[@id="Button1"]')
-        .isSelected()
-          .should.eventually.become(false)
-        .elementByXPath('//MockButton[@id="Button2"]')
-        .isSelected()
-          .should.eventually.become(true)
-        .nodeify();
+    it('should detect whether an element is selected', async () => {
+      let el = driver.elementById('Button1');
+      (await el.isSelected()).should.equal(false);
+      el = driver.elementById('Button2');
+      (await el.isSelected()).should.equal(true);
     });
-    it.skip('should get the location on screen of an element', async () => {
-      driver
-        .elementById('nav')
-        .getLocation()
-        .should.eventually.eql({x: 1, y: 1})
-        .nodeify();
+    it('should get the location on screen of an element', async () => {
+      let el = driver.elementById('nav');
+      (await el.getLocation()).should.eql({x: 1, y: 1});
     });
-    it.skip('should get the location on screen of an element with float vals', async () => {
-      driver
-        .elementById('lv')
-        .getLocation()
-        .should.eventually.eql({x: 20.8, y: 15.3})
-        .nodeify();
+    it('should get the location on screen of an element with float vals', async () => {
+      let el = driver.elementById('lv');
+      (await el.getLocation()).should.eql({x: 20.8, y: 15.3});
     });
-    it.skip('should get the location in view of an element', async () => {
-      driver
-        .elementById('nav')
-        .getLocationInView()
-        .should.eventually.eql({x: 1, y: 1})
-        .nodeify();
+    it('should get the location in view of an element', async () => {
+      let el = driver.elementById('nav');
+      (await el.getLocationInView()).should.eql({x: 1, y: 1});
     });
-    it.skip('should get the location in view of an element with float vals', async () => {
-      driver
-        .elementById('lv')
-        .getLocationInView()
-        .should.eventually.eql({x: 20.8, y: 15.3})
-        .nodeify();
+    it('should get the location in view of an element with float vals', async () => {
+      let el = driver.elementById('lv');
+      (await el.getLocationInView()).should.eql({x: 20.8, y: 15.3});
     });
 
-    it.skip('should get the size of an element', async () => {
-      driver
-        .elementById('nav')
-        .getSize()
-        .should.eventually.eql({width: 100, height: 100})
-        .nodeify();
+    it('should get the size of an element', async () => {
+      let el = await driver.elementById('nav');
+      (await el.getSize()).should.eql({width: 100, height: 100});
     });
-    it.skip('should get the size of an element with float vals', async () => {
-      driver
-        .elementById('wv')
-        .getSize()
-        .should.eventually.eql({width: 20.8, height: 20.5})
-        .nodeify();
+    it('should get the size of an element with float vals', async () => {
+      let el = await driver.elementById('wv');
+      (await el.getSize()).should.eql({width: 20.8, height: 20.5});
     });
-    it.skip('should determine element equality', async () => {
-      var el1;
-      driver
-        .elementById('wv')
-        .then(function (el) {
-          el1 = el;
-          return driver;
-        })
-        .elementById('wv')
-        .then(function (el2) {
-          return el2.equals(el1);
-        })
-        .should.eventually.become(true)
-        .nodeify();
+    it('should determine element equality', async () => {
+      let el1 = await driver.elementById('wv');
+      let el2 = await driver.elementById('wv');
+      (await el1.equals(el2)).should.equal(true);
     });
-    it.skip('should determine element inequality', async () => {
-      var el1;
-      driver
-        .elementById('wv')
-        .then(function (el) {
-          el1 = el;
-          return driver;
-        })
-        .elementById('lv')
-        .then(function (el2) {
-          return el2.equals(el1);
-        })
-        .should.eventually.become(false)
-        .nodeify();
+    it('should determine element inequality', async () => {
+      let el1 = await driver.elementById('wv');
+      let el2 = await driver.elementById('lv');
+      (await el1.equals(el2)).should.equal(false);
     });
   });
 }
