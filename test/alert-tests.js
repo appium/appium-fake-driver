@@ -1,8 +1,4 @@
-import chai from 'chai';
 import { initSession, TEST_APP } from './helpers';
-
-//const should = chai.should();
-chai.should();
 
 function alertTests () {
   describe('alerts', () => {
@@ -10,33 +6,23 @@ function alertTests () {
     let driver;
     initSession(caps).then((d) => { driver = d; });
 
-    it.skip('should not work with alerts when one is not present', async () => {
+    it('should not work with alerts when one is not present', async () => {
       await driver.alertText().should.eventually.be.rejectedWith(/27/);
       await driver.alertKeys('foo').should.eventually.be.rejectedWith(/27/);
       await driver.acceptAlert().should.eventually.be.rejectedWith(/27/);
       await driver.dismissAlert().should.eventually.be.rejectedWith(/27/);
     });
-    it.skip('should get text of an alert', async () => {
-      driver
-        .elementById("AlertButton")
-          .click()
-        .alertText()
-          .should.eventually.become("Fake Alert")
-        .nodeify();
+    it('should get text of an alert', async () => {
+      await driver.elementById("AlertButton").click();
+      (await driver.alertText()).should.equal("Fake Alert");
     });
-    it.skip('should set the text of an alert', async () => {
-      driver
-        .alertKeys('foo')
-        .alertText()
-          .should.eventually.become('foo')
-        .nodeify();
+    it('should set the text of an alert', async () => {
+      await driver.alertKeys('foo');
+      (await driver.alertText()).should.equal('foo');
     });
-    it.skip('should not do other things while an alert is there', async () => {
-      driver
-        .elementById("nav")
-        .click()
-          .should.eventually.be.rejectedWith(/26/)
-        .nodeify();
+    it('should not do other things while an alert is there', async () => {
+      await driver.elementById("nav").click()
+              .should.eventually.be.rejectedWith(/26/);
     });
     it.skip('should accept an alert', async () => {
       driver

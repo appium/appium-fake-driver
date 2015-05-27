@@ -1,7 +1,4 @@
-//import chai from 'chai';
 import { initSession, TEST_APP } from './helpers';
-
-//const should = chai.should();
 
 function elementTests () {
   describe('element interaction and introspection', async () => {
