@@ -44,6 +44,10 @@ function generalTests () {
               .should.eventually.be.rejectedWith(/Orientation must be/);
     });
 
+    it('should get a screenshot', async () => {
+      should.exist(await driver.takeScreenshot());
+    });
+
   });
 }
 
