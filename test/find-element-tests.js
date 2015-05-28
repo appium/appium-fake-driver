@@ -76,6 +76,41 @@ function findElementTests () {
       await driver.elementsByXPath('badsel')
               .should.eventually.be.rejectedWith(/32/);
     });
+
+    it('should find an element from another element', async () => {
+      let el = await driver.elementById('iframe1');
+      let title = await el.elementByTagName('title');
+      let earlierTitle = await driver.elementByTagName('title');
+      (await earlierTitle.equals(title)).should.equal(false);
+    });
+    it('should find multiple elements from another element', async () => {
+      let el = await driver.elementByTagName('html');
+      let titles = await el.elementsByTagName('title');
+      titles.length.should.equal(2);
+    });
+    it('should not find an element that doesnt exist from another element', async () => {
+      let el = await driver.elementByTagName('html');
+      await el.elementByTagName('marquee')
+              .should.eventually.be.rejectedWith(/7/);
+
+    });
+    it('should not find multiple elements that dont exist from another element', async () => {
+      let el = await driver.elementByTagName('html');
+      (await el.elementsByTagName('marquee')).should.eql([]);
+    });
+    it('should not find an element with bad strategy from another element', async () => {
+      await driver.elementByTagName('html').elementByCss('.sorry')
+              .should.eventually.be.rejectedWith(/9/);
+    });
+    it('should not find elements with bad strategy from another element', async () => {
+      await driver.elementByTagName('html').elementsByCss('.sorry')
+              .should.eventually.be.rejectedWith(/9/);
+    });
+    it('should error if root element is not valid', async () => {
+      let el = await driver.elementByTagName('html');
+      el.value = 'foobar';
+      await el.elementByTagName('body').should.eventually.be.rejectedWith(/10/);
+    });
   });
 }
 

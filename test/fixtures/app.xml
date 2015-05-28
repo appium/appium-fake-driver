@@ -6,14 +6,14 @@
     <MockWebView id="wv" top="10" left="10.57" width="20.8" height="20.5">
         <html>
             <head>
-              <title>Test Webview</title>
+              <title value="webview title">Test Webview</title>
             </head>
             <body style="background-color: #000">
               <h1>Hello</h1>
               <iframe id="iframe1">
                 <html>
                   <head>
-                    <title>Test iFrame</title>
+                    <title value="iframe title">Test iFrame</title>
                   </head>
                   <body>
                     <h1 style="font-family: 'comic sans'">I'm an iFrame</h1>
