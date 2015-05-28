@@ -30,6 +30,20 @@ function generalTests () {
       let source = await driver.source();
       source.should.contain('<MockNavBar id="nav"');
     });
+    // TODO do we want to test driver.pageIndex? probably not
+
+    it('should get the orientation', async () => {
+      (await driver.getOrientation()).should.equal("PORTRAIT");
+    });
+    it('should set the orientation to something valid', async () => {
+      await driver.setOrientation("LANDSCAPE");
+      (await driver.getOrientation()).should.equal("LANDSCAPE");
+    });
+    it('should not set the orientation to something invalid', async () => {
+      await driver.setOrientation("INSIDEOUT")
+              .should.eventually.be.rejectedWith(/Orientation must be/);
+    });
+
   });
 }
 

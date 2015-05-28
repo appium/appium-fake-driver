@@ -8,7 +8,7 @@
             <head>
               <title>Test Webview</title>
             </head>
-            <body>
+            <body style="background-color: #000">
               <h1>Hello</h1>
               <iframe id="iframe1">
                 <html>
@@ -16,7 +16,7 @@
                     <title>Test iFrame</title>
                   </head>
                   <body>
-                    <h1>I'm an iFrame</h1>
+                    <h1 style="font-family: 'comic sans'">I'm an iFrame</h1>
                   </body>
                 </html>
               </iframe>  

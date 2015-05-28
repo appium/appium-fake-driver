@@ -1,4 +1,7 @@
+import chai from 'chai';
 import { initSession, TEST_APP } from './helpers';
+
+const should = chai.should();
 
 function elementTests () {
   describe('element interaction and introspection', async () => {
@@ -94,6 +97,20 @@ function elementTests () {
       let el1 = await driver.elementById('wv');
       let el2 = await driver.elementById('lv');
       (await el1.equals(el2)).should.equal(false);
+    });
+
+    it('should not get the css property of an element when not in a webview', async () => {
+      await driver.elementById('Button1').getComputedCss('height')
+              .should.eventually.be.rejectedWith(/36/);
+    });
+    it('should get the css property of an element when in a webview', async () => {
+      await driver.context('WEBVIEW_1');
+      let el = await driver.elementByTagName('body');
+      (await el.getComputedCss('background-color')).should.equal('#000');
+    });
+    it('should return null for an unspecified css property', async () => {
+      let el = await driver.elementByTagName('body');
+      should.equal(await el.getComputedCss('font-size'), null);
     });
   });
 }
