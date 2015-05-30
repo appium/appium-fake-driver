@@ -5,8 +5,12 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
 import 'mochawait';
-import { startServer } from '../..';
+import 'request-promise'; // not used by this lib but a devDep of basedriver
+import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver';
+import { FakeDriver, startServer } from '../..';
 import { TEST_APP, TEST_HOST, TEST_PORT } from './helpers';
+
+chai.use(chaiAsPromised);
 
 import contextTests from './context-tests';
 import findElementTests from './find-element-tests';
@@ -16,11 +20,14 @@ import generalTests from './general-tests';
 
 const should = chai.should();
 const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
-chai.use(chaiAsPromised);
+const caps = {app: TEST_APP};
+
+// test the same things as for base driver
+baseDriverUnitTests(FakeDriver, caps);
+baseDriverE2ETests(FakeDriver, caps);
 
 describe('FakeDriver - via HTTP', () => {
   let server = null;
-  const caps = {app: TEST_APP};
   before(async () => {
     if (shouldStartServer) {
       server = await startServer(TEST_PORT, TEST_HOST);
