@@ -39,7 +39,7 @@ describe('FakeDriver - via HTTP', () => {
     }
   });
 
-  describe('commands', () => {
+  describe('session handling', () => {
     it('should start and stop a session', async () => {
       let driver = wd.promiseChainRemote(TEST_HOST, TEST_PORT);
       let [sessionId] = await driver.init(caps);
@@ -48,6 +48,7 @@ describe('FakeDriver - via HTTP', () => {
       await driver.quit();
       await driver.title().should.eventually.be.rejectedWith(/terminated/);
     });
+
   });
 
   describe('session-based tests', () => {
