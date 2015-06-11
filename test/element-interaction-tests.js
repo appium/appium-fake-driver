@@ -1,13 +1,12 @@
 import chai from 'chai';
-import { initSession, TEST_APP } from './helpers';
+import { initSession, DEFAULT_CAPS } from './helpers';
 
 const should = chai.should();
 
 function elementTests () {
-  describe('element interaction and introspection', async () => {
-    const caps = {app: TEST_APP};
+  describe('element interaction and introspection', () => {
     let driver;
-    initSession(caps).then((d) => { driver = d; });
+    initSession(DEFAULT_CAPS).then((d) => { driver = d; });
 
     it('should not send keys to an invalid element', async () => {
       await driver.elementByXPath('//MockListItem').sendKeys("test value")

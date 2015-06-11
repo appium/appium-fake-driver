@@ -1,10 +1,9 @@
-import { initSession, TEST_APP } from './helpers';
+import { initSession, DEFAULT_CAPS } from './helpers';
 
 function contextTests () {
-  describe('contexts, webviews, frames', async () => {
-    const caps = {app: TEST_APP};
+  describe('contexts, webviews, frames', () => {
     let driver;
-    initSession(caps).then((d) => { driver = d; });
+    initSession(DEFAULT_CAPS).then((d) => { driver = d; });
     it('should get current context', async () => {
       await driver.currentContext()
               .should.eventually.become('NATIVE_APP');

@@ -1,10 +1,9 @@
-import { initSession, TEST_APP } from './helpers';
+import { initSession, DEFAULT_CAPS } from './helpers';
 
 function alertTests () {
   describe('alerts', () => {
-    const caps = {app: TEST_APP};
     let driver;
-    initSession(caps).then((d) => { driver = d; });
+    initSession(DEFAULT_CAPS).then((d) => { driver = d; });
 
     it('should not work with alerts when one is not present', async () => {
       await driver.alertText().should.eventually.be.rejectedWith(/27/);

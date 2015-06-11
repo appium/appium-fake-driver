@@ -8,7 +8,7 @@ import 'mochawait';
 import 'request-promise'; // not used by this lib but a devDep of basedriver
 import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver';
 import { FakeDriver, startServer } from '../..';
-import { TEST_APP, TEST_HOST, TEST_PORT } from './helpers';
+import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
 
 chai.use(chaiAsPromised);
 
@@ -20,11 +20,10 @@ import generalTests from './general-tests';
 
 const should = chai.should();
 const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
-const caps = {app: TEST_APP};
 
 // test the same things as for base driver
-baseDriverUnitTests(FakeDriver, caps);
-baseDriverE2ETests(FakeDriver, caps);
+baseDriverUnitTests(FakeDriver, DEFAULT_CAPS);
+baseDriverE2ETests(FakeDriver, DEFAULT_CAPS);
 
 describe('FakeDriver - via HTTP', () => {
   let server = null;
@@ -42,7 +41,7 @@ describe('FakeDriver - via HTTP', () => {
   describe('session handling', () => {
     it('should start and stop a session', async () => {
       let driver = wd.promiseChainRemote(TEST_HOST, TEST_PORT);
-      let [sessionId] = await driver.init(caps);
+      let [sessionId] = await driver.init(DEFAULT_CAPS);
       should.exist(sessionId);
       sessionId.should.be.a('string');
       await driver.quit();

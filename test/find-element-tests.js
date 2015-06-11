@@ -1,13 +1,12 @@
 import chai from 'chai';
-import { initSession, TEST_APP } from './helpers';
+import { initSession, DEFAULT_CAPS } from './helpers';
 
 const should = chai.should();
 
 function findElementTests () {
-  describe('finding elements', async () => {
-    const caps = {app: TEST_APP};
+  describe('finding elements', () => {
     let driver;
-    initSession(caps).then((d) => { driver = d; });
+    initSession(DEFAULT_CAPS).then((d) => { driver = d; });
 
     it('should find a single element by xpath', async () => {
       let el = await driver.elementByXPath('//MockWebView');
