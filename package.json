@@ -25,7 +25,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "appium-base-driver": "^0.1.2",
+    "appium-base-driver": "^0.1.13",
     "appium-express": "^0.0.4",
     "appium-logger": "^1.1.0",
     "asyncbox": "^2.0.2",
