@@ -4,9 +4,9 @@
   "keywords": [
     "appium"
   ],
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "appium",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/appium/appium-fake-driver.git"
@@ -25,7 +25,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "appium-base-driver": "^0.1.13",
+    "appium-base-driver": "^0.4.11",
     "appium-express": "^0.0.4",
     "appium-logger": "^1.1.0",
     "asyncbox": "^2.0.2",
