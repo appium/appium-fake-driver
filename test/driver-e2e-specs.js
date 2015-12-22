@@ -4,7 +4,6 @@ import B from 'bluebird';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
-import 'mochawait';
 import 'request-promise'; // not used by this lib but a devDep of basedriver
 import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver/build/test';
 import { FakeDriver, startServer } from '../..';

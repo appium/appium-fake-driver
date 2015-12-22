@@ -3,7 +3,6 @@
 import _ from 'lodash';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import 'mochawait';
 import 'request-promise'; // not used by this lib but a devDep of basedriver
 import { FakeDriver } from '../..';
 import { DEFAULT_CAPS } from './helpers';

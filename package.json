@@ -25,15 +25,15 @@
     "lib": "lib"
   },
   "dependencies": {
-    "appium-base-driver": "^0.4.11",
-    "appium-express": "^0.0.4",
-    "appium-logger": "^1.1.0",
+    "appium-base-driver": "^1.2.0",
+    "appium-express": "^1.0.1",
+    "appium-logger": "^2.0.0",
     "asyncbox": "^2.0.2",
     "babel-core": "5.5.5",
     "babel-runtime": "5.5.5",
     "bluebird": "^2.9.25",
     "lodash": "^3.9.1",
-    "mobile-json-wire-protocol": "^0.10.7",
+    "mobile-json-wire-protocol": "^1.0.5",
     "source-map-support": "^0.2.10",
     "xmldom": "^0.1.19",
     "xpath": "0.0.9",
@@ -46,11 +46,10 @@
   },
   "devDependencies": {
     "appium-gulp-plugins": "^1.2.16",
-    "chai": "^2.3.0",
+    "chai": "^3.4.1",
     "chai-as-promised": "^5.0.0",
     "gulp": "^3.8.11",
-    "mochawait": "^2.0.0",
-    "request-promise": "^0.4.2",
-    "wd": "^0.3.11"
+    "request-promise": "^1.0.2",
+    "wd": "^0.4.0"
   }
 }
