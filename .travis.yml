@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "4"
+  - "5"
+  - "6"
+sudo: false
+script:
+  - _FORCE_LOGS=1 npm test
