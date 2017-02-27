@@ -1,15 +1,11 @@
 // transpile:mocha
 
-import B from 'bluebird';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
 import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver/build/test/basedriver';
 import { FakeDriver, startServer } from '../..';
 import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
-
-chai.use(chaiAsPromised);
-
 import contextTests from './context-tests';
 import findElementTests from './find-element-tests';
 import elementInteractionTests from './element-interaction-tests';
@@ -17,6 +13,7 @@ import alertTests from './alert-tests';
 import generalTests from './general-tests';
 
 const should = chai.should();
+chai.use(chaiAsPromised);
 const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
 
 // test the same things as for base driver
@@ -32,7 +29,7 @@ describe('FakeDriver - via HTTP', () => {
   });
   after(async () => {
     if (server) {
-      await B.promisify(server.close.bind(server))();
+      server.close();
     }
   });
 
