@@ -3,6 +3,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
+import request from 'request-promise';
 import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver/build/test/basedriver';
 import { FakeDriver, startServer } from '..';
 import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
@@ -52,6 +53,36 @@ describe('FakeDriver - via HTTP', function () {
     elementInteractionTests();
     alertTests();
     generalTests();
+  });
+
+  describe('w3c', function () {
+    it('should return value.capabilities object for W3C and value for MJSONWP', async function () {
+      // Create a W3C session and check the response
+      let res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
+        json: {
+          capabilities: {
+            alwaysMatch: DEFAULT_CAPS,
+            firstMatch: [{
+              'appium:fakeCap': 'Foo',
+            }],
+          }
+        }
+      });
+      res.value.capabilities.should.deep.equal(Object.assign({}, DEFAULT_CAPS, {
+        fakeCap: 'Foo',
+      }));
+      res.value.sessionId.should.exist;
+      should.not.exist(res.status);
+      res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.value.sessionId}`);
+
+      // Now create a MJSONWP session and check the response
+      res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
+        json: { desiredCapabilities: DEFAULT_CAPS }
+      });
+      res.value.should.deep.equal(DEFAULT_CAPS);
+      res.status.should.equal(0);
+      res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.sessionId}`);
+    });
   });
 
 });

@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import 'request-promise'; // not used by this lib but a devDep of basedriver
+import 'request-promise';
 import { FakeDriver } from '..';
 import { DEFAULT_CAPS } from './helpers';
 
@@ -20,7 +20,7 @@ describe('FakeDriver', function () {
     uniqueSession.should.be.a('string');
     let d2 = new FakeDriver();
     let otherSessionData = [d1.driverData];
-    await d2.createSession(DEFAULT_CAPS, {}, otherSessionData)
+    await d2.createSession(DEFAULT_CAPS, {}, null, otherSessionData)
             .should.eventually.be.rejectedWith(/unique/);
     await d1.deleteSession(uniqueSession);
   });
@@ -30,7 +30,7 @@ describe('FakeDriver', function () {
     session1Id.should.be.a('string');
     let d2 = new FakeDriver();
     let otherSessionData = [d1.driverData];
-    let [session2Id] = await d2.createSession(DEFAULT_CAPS, {}, otherSessionData);
+    let [session2Id] = await d2.createSession(DEFAULT_CAPS, {}, null, otherSessionData);
     session2Id.should.be.a('string');
     session1Id.should.not.equal(session2Id);
     await d1.deleteSession(session1Id);
