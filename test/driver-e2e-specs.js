@@ -56,8 +56,7 @@ describe('FakeDriver - via HTTP', function () {
   });
 
   describe('w3c', function () {
-    it('should return value.capabilities object for W3C and value for MJSONWP', async function () {
-      // Create a W3C session and check the response
+    it('should return value.capabilities object for W3C', async function () {
       let res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
         json: {
           capabilities: {
@@ -74,13 +73,15 @@ describe('FakeDriver - via HTTP', function () {
       res.value.sessionId.should.exist;
       should.not.exist(res.status);
       res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.value.sessionId}`);
+    });
 
-      // Now create a MJSONWP session and check the response
+    it('should return value object for MJSONWP as desiredCapabilities', async function () {
       res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
         json: { desiredCapabilities: DEFAULT_CAPS }
       });
       res.value.should.deep.equal(DEFAULT_CAPS);
       res.status.should.equal(0);
+      res.sessionId.should.exist;
       res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.sessionId}`);
     });
   });
