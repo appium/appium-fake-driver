@@ -76,7 +76,7 @@ describe('FakeDriver - via HTTP', function () {
     });
 
     it('should return value object for MJSONWP as desiredCapabilities', async function () {
-      res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
+      let res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
         json: { desiredCapabilities: DEFAULT_CAPS }
       });
       res.value.should.deep.equal(DEFAULT_CAPS);
