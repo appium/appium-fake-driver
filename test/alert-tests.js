@@ -1,36 +1,38 @@
 import { initSession, DEFAULT_CAPS } from './helpers';
 
 function alertTests () {
-  describe('alerts', () => {
+  describe('alerts', function () {
     let driver;
-    initSession(DEFAULT_CAPS).then((d) => { driver = d; });
+    before(async function () {
+      driver = await initSession(DEFAULT_CAPS);
+    });
 
-    it('should not work with alerts when one is not present', async () => {
+    it('should not work with alerts when one is not present', async function () {
       await driver.alertText().should.eventually.be.rejectedWith(/27/);
       await driver.alertKeys('foo').should.eventually.be.rejectedWith(/27/);
       await driver.acceptAlert().should.eventually.be.rejectedWith(/27/);
       await driver.dismissAlert().should.eventually.be.rejectedWith(/27/);
     });
-    it('should get text of an alert', async () => {
+    it('should get text of an alert', async function () {
       await driver.elementById("AlertButton").click();
       (await driver.alertText()).should.equal("Fake Alert");
     });
-    it('should set the text of an alert', async () => {
+    it('should set the text of an alert', async function () {
       await driver.alertKeys('foo');
       (await driver.alertText()).should.equal('foo');
     });
-    it('should not do other things while an alert is there', async () => {
+    it('should not do other things while an alert is there', async function () {
       await driver.elementById("nav").click()
               .should.eventually.be.rejectedWith(/26/);
     });
-    it.skip('should accept an alert', async () => {
+    it.skip('should accept an alert', async function () {
       driver
         .acceptAlert()
         .elementById("nav")
         .click()
         .nodeify();
     });
-    it.skip('should not set the text of the wrong kind of alert', async () => {
+    it.skip('should not set the text of the wrong kind of alert', async function () {
       driver
         .elementById("AlertButton2")
         .click()
@@ -40,7 +42,7 @@ function alertTests () {
           .should.be.rejectedWith(/12/)
         .nodeify();
     });
-    it.skip('should dismiss an alert', async () => {
+    it.skip('should dismiss an alert', async function () {
       driver
         .acceptAlert()
         .elementById("nav")
@@ -48,7 +50,6 @@ function alertTests () {
         .nodeify();
     });
   });
-
 }
 
 export default alertTests;

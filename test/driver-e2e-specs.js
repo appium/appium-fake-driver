@@ -4,13 +4,14 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
 import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver/build/test/basedriver';
-import { FakeDriver, startServer } from '../..';
+import { FakeDriver, startServer } from '..';
 import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
 import contextTests from './context-tests';
 import findElementTests from './find-element-tests';
 import elementInteractionTests from './element-interaction-tests';
 import alertTests from './alert-tests';
 import generalTests from './general-tests';
+
 
 const should = chai.should();
 chai.use(chaiAsPromised);
@@ -20,21 +21,21 @@ const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
 baseDriverUnitTests(FakeDriver, DEFAULT_CAPS);
 baseDriverE2ETests(FakeDriver, DEFAULT_CAPS);
 
-describe('FakeDriver - via HTTP', () => {
+describe('FakeDriver - via HTTP', function () {
   let server = null;
-  before(async () => {
+  before(async function () {
     if (shouldStartServer) {
       server = await startServer(TEST_PORT, TEST_HOST);
     }
   });
-  after(async () => {
+  after(async function () {
     if (server) {
       server.close();
     }
   });
 
-  describe('session handling', () => {
-    it('should start and stop a session', async () => {
+  describe('session handling', function () {
+    it('should start and stop a session', async function () {
       let driver = wd.promiseChainRemote(TEST_HOST, TEST_PORT);
       let [sessionId] = await driver.init(DEFAULT_CAPS);
       should.exist(sessionId);
@@ -45,7 +46,7 @@ describe('FakeDriver - via HTTP', () => {
 
   });
 
-  describe('session-based tests', () => {
+  describe('session-based tests', function () {
     contextTests();
     findElementTests();
     elementInteractionTests();
