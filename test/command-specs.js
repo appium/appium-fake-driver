@@ -6,7 +6,8 @@ import findCommands from '../lib/commands/find';
 import generalCommands from '../lib/commands/general';
 import exportedCommands from '../lib/commands';
 
-describe('Driver commands', () => {
+
+describe('Driver commands', function () {
   let allCommands = [
     _.keys(contextCommands),
     _.keys(elementCommands),
@@ -14,14 +15,13 @@ describe('Driver commands', () => {
     _.keys(generalCommands)
   ];
   let totalCommands = _.sum(allCommands.map(c => c.length));
-  it('should not overlap between files', () => {
+  it('should not overlap between files', function () {
     _.union(...allCommands).length.should.equal(totalCommands);
   });
-  it('should export all commands and not leave any out', () => {
+  it('should export all commands and not leave any out', function () {
     _.difference(
       _.union(...allCommands),
       _.keys(exportedCommands)
     ).should.eql([]);
   });
 });
-
