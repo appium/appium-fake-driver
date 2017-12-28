@@ -1,10 +1,13 @@
-import { initSession, DEFAULT_CAPS } from './helpers';
+import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
 
 function alertTests () {
   describe('alerts', function () {
     let driver;
-    before(async function () {
+    before (async function () {
       driver = await initSession(DEFAULT_CAPS);
+    });
+    after(async function () {
+      await deleteSession();
     });
 
     it('should not work with alerts when one is not present', async function () {

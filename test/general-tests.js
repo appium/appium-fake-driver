@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { initSession, DEFAULT_CAPS } from './helpers';
+import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
 
 const should = chai.should();
 
@@ -9,6 +9,10 @@ function generalTests () {
 
     before(async function () {
       driver = await initSession(DEFAULT_CAPS);
+    });
+
+    after(async function () {
+      await deleteSession();
     });
 
     it('should not send keys without a focused element', async function () {

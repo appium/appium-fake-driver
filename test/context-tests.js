@@ -1,12 +1,14 @@
-import { initSession, DEFAULT_CAPS } from './helpers';
+import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
 
 function contextTests () {
-  describe('contexts, webviews, frames', function () {
+  describe('contexts, webviews, frames', async function () {
     let driver;
-    before(async function () {
+    before (async function () {
       driver = await initSession(DEFAULT_CAPS);
     });
-
+    after(async function () {
+      await deleteSession();
+    });
     it('should get current context', async function () {
       await driver.currentContext()
               .should.eventually.become('NATIVE_APP');
