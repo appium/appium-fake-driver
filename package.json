@@ -28,34 +28,38 @@
     "appium-base-driver": "^2.18.4",
     "appium-support": "^2.11.1",
     "asyncbox": "^2.3.2",
-    "babel-core": "5.8.24",
     "babel-runtime": "5.8.24",
     "bluebird": "^3.5.1",
     "lodash": "^4.17.4",
-    "source-map-support": "^0.4.18",
+    "source-map-support": "^0.5.5",
     "xmldom": "^0.1.19",
-    "xpath": "0.0.9",
-    "yargs": "^3.9.0"
+    "xpath": "0.0.27",
+    "yargs": "^11.0.0"
   },
   "scripts": {
+    "build": "gulp transpile",
+    "mocha": "mocha",
     "prepublish": "gulp prepublish",
     "test": "gulp once",
     "e2e-test": "gulp e2e-test",
     "watch": "gulp watch",
-    "build": "gulp transpile",
-    "lint": "gulp eslint"
+    "coverage": "gulp coveralls",
+    "lint": "gulp eslint",
+    "lint:fix": "gulp eslint --fix"
   },
   "devDependencies": {
     "appium-gulp-plugins": "^2.2.0",
-    "chai": "^3.4.1",
-    "chai-as-promised": "^5.0.0",
+    "babel-eslint": "^7.1.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^3.18.0",
     "eslint-config-appium": "^2.0.1",
+    "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-mocha": "^4.7.0",
     "eslint-plugin-promise": "^3.3.1",
     "gulp": "^3.8.11",
-    "request-promise": "^1.0.2",
+    "request-promise": "^4.2.2",
     "wd": "^1.5.0"
   }
 }
