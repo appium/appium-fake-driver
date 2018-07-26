@@ -4,7 +4,7 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
 import request from 'request-promise';
-import { baseDriverE2ETests, baseDriverUnitTests } from 'appium-base-driver/build/test/basedriver';
+import { baseDriverE2ETests } from 'appium-base-driver/build/test/basedriver';
 import { FakeDriver, startServer } from '..';
 import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
 import contextTests from './context-tests';
@@ -19,7 +19,6 @@ chai.use(chaiAsPromised);
 const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
 
 // test the same things as for base driver
-baseDriverUnitTests(FakeDriver, DEFAULT_CAPS);
 baseDriverE2ETests(FakeDriver, DEFAULT_CAPS);
 
 describe('FakeDriver - via HTTP', function () {

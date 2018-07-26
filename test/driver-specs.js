@@ -6,10 +6,14 @@ import chaiAsPromised from 'chai-as-promised';
 import 'request-promise';
 import { FakeDriver } from '..';
 import { DEFAULT_CAPS } from './helpers';
+import { baseDriverUnitTests } from 'appium-base-driver/build/test/basedriver';
+
 
 chai.use(chaiAsPromised);
-
 chai.should();
+
+// test the same things as for base driver
+baseDriverUnitTests(FakeDriver, DEFAULT_CAPS);
 
 describe('FakeDriver', function () {
   it('should not start a session when a unique session is already running', async function () {
