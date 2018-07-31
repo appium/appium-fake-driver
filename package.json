@@ -46,7 +46,7 @@
     "coverage": "gulp coveralls",
     "lint": "gulp eslint",
     "lint:fix": "gulp eslint --fix",
-    "clean": "rm -rf node_modules && rm package-lock.json && npm install"
+    "clean": "rm -rf node_modules && rm -f package-lock.json && npm install"
   },
   "devDependencies": {
     "appium-gulp-plugins": "^2.2.0",
