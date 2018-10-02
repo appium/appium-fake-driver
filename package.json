@@ -28,7 +28,8 @@
     "index.js",
     "lib",
     "build/index.js",
-    "build/lib"
+    "build/lib",
+    "test/fixtures"
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0",
