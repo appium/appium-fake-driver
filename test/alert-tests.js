@@ -28,14 +28,14 @@ function alertTests () {
       await driver.elementById("nav").click()
               .should.eventually.be.rejectedWith(/26/);
     });
-    it.skip('should accept an alert', async function () {
+    it.skip('should accept an alert', function () {
       driver
         .acceptAlert()
         .elementById("nav")
         .click()
         .nodeify();
     });
-    it.skip('should not set the text of the wrong kind of alert', async function () {
+    it.skip('should not set the text of the wrong kind of alert', function () {
       driver
         .elementById("AlertButton2")
         .click()
@@ -45,7 +45,7 @@ function alertTests () {
           .should.be.rejectedWith(/12/)
         .nodeify();
     });
-    it.skip('should dismiss an alert', async function () {
+    it.skip('should dismiss an alert', function () {
       driver
         .acceptAlert()
         .elementById("nav")

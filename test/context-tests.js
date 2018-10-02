@@ -1,7 +1,7 @@
 import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
 
 function contextTests () {
-  describe('contexts, webviews, frames', async function () {
+  describe('contexts, webviews, frames', function () {
     let driver;
     before (async function () {
       driver = await initSession(DEFAULT_CAPS);
