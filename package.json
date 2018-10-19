@@ -68,6 +68,7 @@
     "eslint-plugin-promise": "^4.0.0",
     "gulp": "^4.0.0",
     "request-promise": "^4.2.2",
+    "sinon": "^7.0.0",
     "wd": "^1.5.0"
   },
   "greenkeeper": {
