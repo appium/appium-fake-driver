@@ -16,13 +16,13 @@ function generalTests () {
     });
 
     it('should not send keys without a focused element', async function () {
-      await driver.keys("test").should.eventually.be.rejectedWith(/12/);
+      await driver.keys('test').should.eventually.be.rejectedWith(/12/);
     });
     it('should send keys to a focused element', async function () {
       let el = await driver.elementById('input');
       await el.click();
-      await driver.keys("test");
-      (await el.text()).should.equal("test");
+      await driver.keys('test');
+      (await el.text()).should.equal('test');
     });
     it.skip('should set geolocation', async function () {
       // TODO unquarantine when WD fixes what it sends the server
@@ -40,14 +40,14 @@ function generalTests () {
     // TODO do we want to test driver.pageIndex? probably not
 
     it('should get the orientation', async function () {
-      (await driver.getOrientation()).should.equal("PORTRAIT");
+      (await driver.getOrientation()).should.equal('PORTRAIT');
     });
     it('should set the orientation to something valid', async function () {
-      await driver.setOrientation("LANDSCAPE");
-      (await driver.getOrientation()).should.equal("LANDSCAPE");
+      await driver.setOrientation('LANDSCAPE');
+      (await driver.getOrientation()).should.equal('LANDSCAPE');
     });
     it('should not set the orientation to something invalid', async function () {
-      await driver.setOrientation("INSIDEOUT")
+      await driver.setOrientation('INSIDEOUT')
               .should.eventually.be.rejectedWith(/Orientation must be/);
     });
 

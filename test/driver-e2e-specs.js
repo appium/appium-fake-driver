@@ -16,7 +16,7 @@ import generalTests from './general-tests';
 
 const should = chai.should();
 chai.use(chaiAsPromised);
-const shouldStartServer = process.env.USE_RUNNING_SERVER !== "0";
+const shouldStartServer = process.env.USE_RUNNING_SERVER !== '0';
 
 // test the same things as for base driver
 baseDriverE2ETests(FakeDriver, DEFAULT_CAPS);

@@ -17,27 +17,27 @@ function alertTests () {
       await driver.dismissAlert().should.eventually.be.rejectedWith(/27/);
     });
     it('should get text of an alert', async function () {
-      await driver.elementById("AlertButton").click();
-      (await driver.alertText()).should.equal("Fake Alert");
+      await driver.elementById('AlertButton').click();
+      (await driver.alertText()).should.equal('Fake Alert');
     });
     it('should set the text of an alert', async function () {
       await driver.alertKeys('foo');
       (await driver.alertText()).should.equal('foo');
     });
     it('should not do other things while an alert is there', async function () {
-      await driver.elementById("nav").click()
+      await driver.elementById('nav').click()
               .should.eventually.be.rejectedWith(/26/);
     });
     it.skip('should accept an alert', function () {
       driver
         .acceptAlert()
-        .elementById("nav")
+        .elementById('nav')
         .click()
         .nodeify();
     });
     it.skip('should not set the text of the wrong kind of alert', function () {
       driver
-        .elementById("AlertButton2")
+        .elementById('AlertButton2')
         .click()
         .alertText()
           .should.eventually.become('Fake Alert 2')
@@ -48,7 +48,7 @@ function alertTests () {
     it.skip('should dismiss an alert', function () {
       driver
         .acceptAlert()
-        .elementById("nav")
+        .elementById('nav')
         .click()
         .nodeify();
     });

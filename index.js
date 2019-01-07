@@ -10,7 +10,7 @@ import * as server from './lib/server';
 const { FakeDriver } = driver;
 const { startServer } = server;
 
-const DEFAULT_HOST = "localhost";
+const DEFAULT_HOST = 'localhost';
 const DEFAULT_PORT = 4774;
 
 async function main () {
