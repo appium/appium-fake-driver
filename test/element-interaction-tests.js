@@ -14,13 +14,13 @@ function elementTests () {
     });
 
     it('should not send keys to an invalid element', async function () {
-      await driver.elementByXPath('//MockListItem').sendKeys("test value")
+      await driver.elementByXPath('//MockListItem').sendKeys('test value')
               .should.eventually.be.rejectedWith(/12/);
     });
     it('should send keys to an element and retrieve text', async function () {
       let el = await driver.elementByXPath('//MockInputField');
-      await el.sendKeys("test value");
-      (await el.text()).should.eql("test value");
+      await el.sendKeys('test value');
+      (await el.text()).should.eql('test value');
     });
     it('should not clear an invalid element', async function () {
       await driver.elementByXPath('//MockListItem').clear()
