@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8"
   - "10"
+  - "12"
 script:
   - _FORCE_LOGS=1 npm test
