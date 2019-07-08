@@ -6,7 +6,13 @@ const TEST_HOST = 'localhost';
 const TEST_PORT = 4774;
 const TEST_APP = path.resolve(__dirname, '..', '..', 'test', 'fixtures', 'app.xml');
 
-const DEFAULT_CAPS = {platformName: 'Fake', deviceName: 'Fake', app: TEST_APP};
+const DEFAULT_CAPS = {
+  platformName: 'Fake',
+  deviceName: 'Fake',
+  app: TEST_APP,
+  address: 'localhost',
+  port: 8181,
+};
 
 let driver;
 
