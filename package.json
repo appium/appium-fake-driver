@@ -41,7 +41,7 @@
     "source-map-support": "^0.5.5",
     "xmldom": "^0.1.19",
     "xpath": "0.0.27",
-    "yargs": "^13.1.0"
+    "yargs": "^14.0.0"
   },
   "scripts": {
     "build": "gulp transpile",
