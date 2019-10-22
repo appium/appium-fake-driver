@@ -17,6 +17,14 @@
   "engines": [
     "node"
   ],
+  "appium": {
+    "driverName": "fake",
+    "automationName": "Fake",
+    "platformNames": [
+      "Fake"
+    ],
+    "mainClass": "FakeDriver"
+  },
   "main": "./build/index.js",
   "bin": {
     "appium-fake-driver": "./build/index.js"
