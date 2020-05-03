@@ -70,7 +70,6 @@
     "chai-as-promised": "^7.1.1",
     "eslint-config-appium": "^4.0.1",
     "gulp": "^4.0.0",
-    "request-promise": "^4.2.2",
     "sinon": "^9.0.0",
     "wd": "^1.5.0"
   },
