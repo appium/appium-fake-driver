@@ -3,7 +3,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import wd from 'wd';
-import request from 'request-promise';
+import axios from 'axios';
 import { baseDriverE2ETests } from 'appium-base-driver/build/test/basedriver';
 import { FakeDriver, startServer } from '..';
 import { DEFAULT_CAPS, TEST_HOST, TEST_PORT } from './helpers';
@@ -56,32 +56,32 @@ describe('FakeDriver - via HTTP', function () {
 
   describe('w3c', function () {
     it('should return value.capabilities object for W3C', async function () {
-      let res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
-        json: {
-          capabilities: {
-            alwaysMatch: DEFAULT_CAPS,
-            firstMatch: [{
-              'appium:fakeCap': 'Foo',
-            }],
-          }
+      const res = await axios.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
+        capabilities: {
+          alwaysMatch: DEFAULT_CAPS,
+          firstMatch: [{
+            'appium:fakeCap': 'Foo',
+          }],
         }
       });
-      res.value.capabilities.should.deep.equal(Object.assign({}, DEFAULT_CAPS, {
+      const {value, status} = res.data;
+      value.capabilities.should.deep.equal(Object.assign({}, DEFAULT_CAPS, {
         fakeCap: 'Foo',
       }));
-      res.value.sessionId.should.exist;
-      should.not.exist(res.status);
-      res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.value.sessionId}`);
+      value.sessionId.should.exist;
+      should.not.exist(status);
+      await axios.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${value.sessionId}`);
     });
 
     it('should return value object for MJSONWP as desiredCapabilities', async function () {
-      let res = await request.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
-        json: { desiredCapabilities: DEFAULT_CAPS }
+      const res = await axios.post(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session`, {
+        desiredCapabilities: DEFAULT_CAPS
       });
-      res.value.should.deep.equal(DEFAULT_CAPS);
-      res.status.should.equal(0);
-      res.sessionId.should.exist;
-      res = await request.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${res.sessionId}`);
+      const {value, status, sessionId} = res.data;
+      value.should.deep.equal(DEFAULT_CAPS);
+      status.should.equal(0);
+      sessionId.should.exist;
+      await axios.delete(`http://${TEST_HOST}:${TEST_PORT}/wd/hub/session/${sessionId}`);
     });
   });
 
