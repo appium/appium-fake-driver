@@ -47,7 +47,7 @@
     "bluebird": "^3.5.1",
     "lodash": "^4.17.4",
     "source-map-support": "^0.5.5",
-    "xmldom": "^0.3.0",
+    "xmldom": "^0.4.0",
     "xpath": "0.0.32",
     "yargs": "^16.0.3"
   },
