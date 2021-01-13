@@ -58,6 +58,11 @@ function generalTests () {
       screenshot.should.match(/^iVBOR/);
       screenshot.should.have.length.above(4000);
     });
+    it('should get screen height/width', async function () {
+      const {height, width} = await driver.getWindowSize();
+      height.should.be.above(100);
+      width.should.be.above(100);
+    });
 
     it('should set implicit wait timeout', async function () {
       await driver.setImplicitWaitTimeout(1000);
@@ -83,6 +88,7 @@ function generalTests () {
       await driver.setPageLoadTimeout('foo')
               .should.eventually.be.rejectedWith(/ms/);
     });
+
   });
 }
 
