@@ -1,7 +1,9 @@
 import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
 
 const should = chai.should();
+chai.use(chaiAsPromised);
 
 function generalTests () {
   describe('generic actions', function () {
@@ -52,7 +54,9 @@ function generalTests () {
     });
 
     it('should get a screenshot', async function () {
-      should.exist(await driver.takeScreenshot());
+      const screenshot = await driver.takeScreenshot();
+      screenshot.should.match(/^iVBOR/);
+      screenshot.should.have.length.above(4000);
     });
 
     it('should set implicit wait timeout', async function () {
