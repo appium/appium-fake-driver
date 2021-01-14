@@ -37,7 +37,8 @@
     "lib",
     "build/index.js",
     "build/lib",
-    "test/fixtures"
+    "test/fixtures",
+    "screen.png"
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0",
