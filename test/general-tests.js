@@ -1,6 +1,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { initSession, deleteSession, DEFAULT_CAPS } from './helpers';
+import { W3CActions } from 'wd';
 
 const should = chai.should();
 chai.use(chaiAsPromised);
@@ -87,6 +88,17 @@ function generalTests () {
     it.skip('should not set page load script timeout', async function () {
       await driver.setPageLoadTimeout('foo')
               .should.eventually.be.rejectedWith(/ms/);
+    });
+
+    it('should allow performing actions that do nothing but save them', async function () {
+      const actions = new W3CActions(driver);
+      const touch = actions.addTouchInput();
+      touch.pointerDown();
+      touch.pointerUp();
+      await driver.performW3CActions(actions);
+      const [res] = await driver.log('actions');
+      res[0].type.should.eql('pointer');
+      res[0].actions.should.have.length(2);
     });
 
   });
