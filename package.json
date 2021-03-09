@@ -47,9 +47,9 @@
     "asyncbox": "^2.3.2",
     "bluebird": "^3.5.1",
     "lodash": "^4.17.4",
-    "source-map-support": "^0.5.5",
-    "xmldom": "^0.4.0",
-    "xpath": "0.0.32",
+    "source-map-support": "^0.x",
+    "xmldom": "^0.x",
+    "xpath": "^0.x",
     "yargs": "^16.0.3"
   },
   "scripts": {
