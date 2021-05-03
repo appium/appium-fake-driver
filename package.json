@@ -50,7 +50,7 @@
     "source-map-support": "^0.x",
     "xmldom": "^0.x",
     "xpath": "^0.x",
-    "yargs": "^16.0.3"
+    "yargs": "^17.0.0"
   },
   "scripts": {
     "build": "gulp transpile",
