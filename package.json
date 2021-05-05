@@ -49,8 +49,7 @@
     "lodash": "^4.17.4",
     "source-map-support": "^0.x",
     "xmldom": "^0.x",
-    "xpath": "^0.x",
-    "yargs": "^17.0.0"
+    "xpath": "^0.x"
   },
   "scripts": {
     "build": "gulp transpile",
