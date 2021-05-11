@@ -23,7 +23,11 @@
     "platformNames": [
       "Fake"
     ],
-    "mainClass": "FakeDriver"
+    "mainClass": "FakeDriver",
+    "scripts": {
+      "fake-error": "./build/lib/scripts/fake-error.js",
+      "fake-success": "./build/lib/scripts/fake-success.js"
+    }
   },
   "main": "./build/index.js",
   "bin": {
